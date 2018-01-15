@@ -24,23 +24,13 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     },
-   (accessToken, refreshToken, extraParams, profile, done) =>
-   {
-     User.findOne({ googleId: profile.id })
-      .then((existingUser) => {
-        if (existingUser) {
-          // already have user with given id
-          done(null, existingUser);
-        } else {
-          new Users({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
-    // return done(null, profile);
+    async (accessToken, refreshToken, extraParams, profile, done) => {
+    const existingUser = await User.findOne({ googleId: profile.id })
+    if (existingUser) {
+      return done(null, existingUser);
+    }
+      const user = await new User({ googleId: profile.id }).save()
+      done(null, user);
     }
   )
 );
