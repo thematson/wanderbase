@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+// import getMuiTheme from "material-ui/styles/getMuiTheme";
+// import AppBar from "material-ui/AppBar";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import Header from "./Header";
 import Landing from "./Landing";
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import Dashboard from "./Dashboard";
+import ConcernNew from "./concerns/ConcernNew";
 
 class App extends Component {
   //right after component renders do this => (this case action creator)
@@ -23,7 +26,7 @@ class App extends Component {
             <div className="container">
               <Route exact path="/" component={Landing} />
               <Route exact path="/surveys" component={Dashboard} />
-              <Route path="/surveys/new" component={SurveyNew} />
+              <Route path="/surveys/new" component={ConcernNew} />
             </div>
           </div>
         </BrowserRouter>
