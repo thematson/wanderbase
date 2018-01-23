@@ -54,12 +54,16 @@ module.exports = app => {
 
     console.log(recipients);
 
-    await transporter.sendMail(mailOptions, function(err, info) {
-      if (err) console.log(err);
-      else console.log(info);
-    });
+    try{
+      await transporter.sendMail(mailOptions, function(err, info) {
+        if (err) console.log(err);
+        else console.log(info);
+      });
 
-    await concern.save();
+      await concern.save();
+    } catch (err) {
+      res.status(422).send(err);
+    }
 
     //send email here?
     // const mailer = new Mailer(issue, emailResponse(issue));
