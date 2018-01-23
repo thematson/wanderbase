@@ -1,138 +1,93 @@
-//concern form
+// SurveyForm shows a form for a user to add input
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field, formValueSelector } from "redux-form";
 import { Link } from "react-router-dom";
 import ConcernField from "./ConcernField";
+import validateEmails from "../../utils/validateEmails";
+import formFields from "./formFields";
 
-let ConcernForm = props => {
-  const { recoveryCheckValue, pristine, submitting, handleSubmit } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Guest Last Name</label>
-        <div>
-          <Field
-            type="text"
-            name="lastName"
-            component="input"
-            placeholder="Last Name"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Guest First Name</label>
-        <div>
-          <Field
-            type="text"
-            name="firstName"
-            component="input"
-            placeholder="First Name"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Guest Zip Code</label>
-        <div>
-          <Field
-            type="text"
-            name="zipCode"
-            component="input"
-            placeholder="11111"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Description of Concern</label>
-        <div>
-          <Field type="text" name="descOfConcern" component="textarea" />
-        </div>
-      </div>
-      <div>
-        <label>User ID</label>
-        <div>
-          <Field
-            type="text"
-            name="userId"
-            component="input"
-            placeholder="abcd123"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Deliver Communication Email</label>
-        <div>
-          <Field
-            type="email"
-            name="sendEmail"
-            component="input"
-            placeholder="recoveryteam@company.com"
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="filled-in-box">Recovery Completed? &nbsp; &nbsp;</label>{" "}
+class ConcernForm extends Component {
+  renderFields() {
+    return _.map(formFields, ({ label, name, type, placeholder }) => {
+      return (
         <Field
-          name="recoveryCheck"
-          className="filled-in"
-          id="filled-in-box"
-          component="input"
-          type="checkbox"
+          key={name}
+          component={ConcernField}
+          type={type}
+          label={label}
+          name={name}
+          placeholder={placeholder}
         />
-        <div />
-      </div>
-      {recoveryCheckValue && (
-        <div>
-          <label>Description of Recovery</label>
-          <div>
-            <Field type="text" name="descOfRecovery" component="textarea" />
-          </div>
-        </div>
-      )}
-      <div>
-        <Link to="/surveys" className="grey btn-flat white-text">
-          Cancel
-        </Link>
-        <button
-          type="submit"
-          className="teal btn-flat right white-text"
-          disabled={pristine || submitting}
-        >
-          Next
-          <i className="material-icons right">done</i>
-        </button>
-      </div>
-    </form>
-  );
-};
+      );
+    });
+  }
 
-ConcernForm = reduxForm({
-  form: "concernForm" // a unique identifier for this form
-})(ConcernForm);
+  render() {
+    return (
+      <div className="top" id="concernForm">
+        <form onSubmit={this.props.handleSubmit(this.props.onConcernSubmit)}>
+          {this.renderFields()}
+          {/* <div>
+            <label htmlFor="filled-in-box">
+              Recovery Completed? &nbsp; &nbsp;
+            </label>{" "}
+            <Field
+              name="recoveryCheck"
+              className="filled-in"
+              id="filled-in-box"
+              component="input"
+              type="checkbox"
+            />
+            <div />
+            <br />
+          </div> */}
 
-// Decorate with connect to read form values
+          <Link to="/concerns" className="red btn-flat white-text">
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            className="green lighten-1 btn-flat right white-text"
+          >
+            Next
+            <i className="material-icons right">done</i>
+          </button>
+        </form>
+      </div>
+    );
+  }
+}
+
 const selector = formValueSelector("concernForm"); // <-- same as form name
 ConcernForm = connect(state => {
+  // can select values individually
   const recoveryCheckValue = selector(state, "recoveryCheck");
+
   return {
     recoveryCheckValue
   };
 })(ConcernForm);
 
-export default ConcernForm;
+function validate(values) {
+  const errors = {};
 
-//   render() {
-//     return (
-//       <div>
-//         <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-//           {this.renderFields()}
-//           <button type="submit">Submit</button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
+  errors.recipients = validateEmails(values.recipients || "");
 
-// export default reduxForm({
-//   form: "concernForm"
-// })(ConcernForm);
+  _.each(formFields, ({ name }) => {
+    if (name !== "recoveryCheck" && name !== "descOfRecovery") {
+      if (!values[name]) {
+        errors[name] = "You must provide a value";
+      }
+    }
+  });
+
+  return errors;
+}
+
+export default reduxForm({
+  validate,
+  form: "concernForm",
+  destroyOnUnmount: false
+})(ConcernForm);

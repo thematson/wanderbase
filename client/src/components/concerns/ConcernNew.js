@@ -1,17 +1,32 @@
 //concern new
 
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { reduxForm } from "redux-form";
 import ConcernForm from "./ConcernForm";
+import ConcernFormReview from "./ConcernFormReview";
 
 class ConcernNew extends Component {
-  render() {
+  state = { showConcernReview: false };
+
+  renderContent() {
+    if (this.state.showConcernReview) {
+      return (
+        <ConcernFormReview
+          onCancel={() => this.setState({ showConcernReview: false })}
+        />
+      );
+    }
     return (
-      <div>
-        <ConcernForm />
-      </div>
+      <ConcernForm
+        onConcernSubmit={() => this.setState({ showConcernReview: true })}
+      />
     );
+  }
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
-export default ConcernNew;
+export default reduxForm({
+  form: "concernForm"
+})(ConcernNew);

@@ -10,7 +10,7 @@ class Header extends Component {
       case false:
         return (
           <li>
-            <a href="/auth/google">Login With Google</a>
+            <a href="/login">Login || Register</a>
           </li>
         );
       default:
@@ -23,14 +23,14 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props.auth);
     return (
       <nav>
         <div className="nav-wrapper">
           <Link
-            to={this.props.auth ? '/surveys' : '/'}
+            to={this.props.auth ? '/concerns' : '/'}
             className="left brand-logo"
-            style={{ padding: "0 0 0 30px" }}
+            // style={{ padding: "0 0 0 30px" }}
           >
             wanderBase
           </Link>
@@ -39,6 +39,7 @@ class Header extends Component {
           </ul>
         </div>
       </nav>
+
     );
   }
 }

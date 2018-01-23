@@ -1,47 +1,26 @@
 const express = require("express");
+const multer = require("multer");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const flash = require("connect-flash");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const cloudinary = require("cloudinary");
+
 const keys = require("./config/keys");
 const nodemailer = require("nodemailer");
 require("./models/User");
-require("./models/Issue");
+require("./models/Concern");
 
 require("./services/passport");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
-// const emailList = ["eric.matson@gmail.com", "matson@live.com"];
-
-// //*********************** email start
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: "wanderbasemail@gmail.com",
-//     pass: "wanderbase99"
-//   }
-// });
-
-// const mailOptions = {
-//   from: "wanderbasemail@gmail.com", // sender address
-//   to: emailList, // list of receivers
-//   subject: "wanderbase new document", // Subject line
-//   html:
-//     "<p>There has been a new document created in <a href='https://pure-sea-27226.herokuapp.com/'>wanderbase</a>. Please visit the <a href='https://pure-sea-27226.herokuapp.com/'>app</a> for more details.</p><br/><p>Thank You.</p>" // plain text body
-// };
-
-// // actually sends email below
-
-// transporter.sendMail(mailOptions, function(err, info) {
-//   if (err) console.log(err);
-//   else console.log(info);
-// });
-
-//***************************email stop */
-
 const app = express();
+
+app.use(bodyParser.json()); // get information from html forms
 
 app.use(
   cookieSession({
@@ -54,8 +33,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// routes ======================================================================
+// require("./app/routes.js")(app, passport); // load our routes and pass in our app and fully configured passport
+
 require("./routes/authRoutes")(app);
-require("./routes/issueRoutes")(app);
+require("./routes/concernRoutes")(app);
+// require("./routes/fileuploadRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   //express will serve up prodeuction assets
@@ -66,7 +50,7 @@ if (process.env.NODE_ENV === "production") {
   //if it doesn't recognize the route
   const path = require("path");
   app.get("*", (req, res) => {
-    res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendfile(path.resolve(__dirname, "client", "build", "index3.html"));
   });
 }
 

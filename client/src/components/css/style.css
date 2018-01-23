@@ -1,0 +1,96 @@
+label {
+  font-size: 1.2rem;
+}
+
+nav {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding-left: 16px;
+  z-index: 500;
+}
+
+
+nav .brand-logo {
+  font-family: Lato !important;
+  color: white !important;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: .1rem;
+  font-weight: 700;
+  padding: .0 1rem 0 1rem;
+  margin-left: 23px;
+}
+
+nav ul a {
+  font-family: Lato !important;
+  color: gainsboro !important;
+  text-transform: uppercase;
+  font-size: .8rem;
+  letter-spacing: .1rem;
+  font-weight: 700;
+  padding: .0 1rem 0 1rem;
+  margin-left: 23px;
+}
+
+nav .bg-circle-4 {
+    height: 30rem;
+    width: 30rem;
+    top: -5rem;
+    right: 35%;
+}
+
+.container {
+  font-family: Lato !important;
+  min-width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+.masthead-content {
+    font-family: Lato !important;
+
+}
+
+.nav-wrapper {
+  margin-left: 60px !important;
+  margin-right: 60px !important;
+}
+
+form {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+#concernForm {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+#concernreview {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+#formSubmit {
+  background-color: #00A5CF;
+}
+
+.results {
+  font-size: 25px;
+
+}
+
+.input-field input:focus+label {
+  color: #00A5CF !important;
+}
+
+.row .input-field input:focus {
+  border-bottom: 1px solid #00A5CF !important;
+  box-shadow: 0 1px 0 0 #00A5CF !important
+}
+
+.top {
+  margin-top: 50px !important;
+}

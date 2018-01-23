@@ -4,16 +4,15 @@ const keys = require("../config/keys");
 
 class Mailer extends helper.Mail {
   constructor(
-    { guestFirstName, guestLastName, guestZipCode, recipients },
+    { guestName, zipCode, recipients },
     content
   ) {
     super();
 
     this.sgApi = sendgrid(keys.sendGridKey);
     this.from_email = new helper.Email("no-reply@wanderbase.com");
-    this.guestFirstName = guestFirstName;
-    this.guestLastName = guestLastName;
-    this.guestZipCode = guestZipCode;
+    this.guestName = guestName;
+    this.zipCode = zipCode;
     this.body = new helper.Content("text/html", content);
     this.recipients = this.formatAddresses(recipients);
 

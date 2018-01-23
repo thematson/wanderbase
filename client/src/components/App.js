@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-// import getMuiTheme from "material-ui/styles/getMuiTheme";
-// import AppBar from "material-ui/AppBar";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -10,6 +7,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import ConcernNew from "./concerns/ConcernNew";
+import ReactFileReader from "react-file-reader";
 
 class App extends Component {
   //right after component renders do this => (this case action creator)
@@ -23,10 +21,21 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
+            <Route exact path="/" component={Landing} />
             <div className="container">
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/surveys" component={Dashboard} />
-              <Route path="/surveys/new" component={ConcernNew} />
+              <br />
+
+              {/* <ReactFileReader
+                fileTypes={[".csv", ".zip"]}
+                base64={true}
+                multipleFiles={true}
+                handleFiles={this.handleFiles}
+              >
+                <button className="btn">Upload</button>
+              </ReactFileReader> */}
+
+              <Route exact path="/concerns" component={Dashboard} />
+              <Route path="/concerns/new" component={ConcernNew} />
             </div>
           </div>
         </BrowserRouter>
