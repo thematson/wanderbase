@@ -11,6 +11,7 @@ import formFields from "./formFields";
 class ConcernForm extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name, type, placeholder }) => {
+
       return (
         <Field
           key={name}
@@ -21,6 +22,7 @@ class ConcernForm extends Component {
           placeholder={placeholder}
         />
       );
+
     });
   }
 
@@ -28,6 +30,7 @@ class ConcernForm extends Component {
     return (
       <div className="top" id="concernForm">
         <form onSubmit={this.props.handleSubmit(this.props.onConcernSubmit)}>
+
           {this.renderFields()}
           {/* <div>
             <label htmlFor="filled-in-box">

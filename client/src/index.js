@@ -1,6 +1,7 @@
 import "materialize-css/dist/css/materialize.min.css"; //
 import "./components/css/style.css";
 import "./components/parallax-template/css/style.css";
+
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

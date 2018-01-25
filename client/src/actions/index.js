@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_CONCERNS } from "./types";
+import { FETCH_USER, FETCH_CONCERNS, FETCH_MATCHES, FETCH_SEARCH } from "./types";
 
 // this is and ACTION CREATOR
 //when the fetchUser is called, it will return a function
@@ -17,12 +17,18 @@ export const fetchUser = () => async dispatch => {
 export const submitConcern = (values, history) => async dispatch => {
   const res = await axios.post("/api/concerns", values);
 
-  this.context.history.push("/concerns");
-  dispatch({ type: FETCH_USER, payload: res.data });
+  history.push("/concerns");
+  dispatch({ type: FETCH_CONCERNS, payload: res.data });
 };
 
 export const fetchConcerns = () => async dispatch => {
   const res = await axios.get("/api/concerns");
 
-  dispatch({ type: FETCH_CONCERNS, payload: res.data });
+  dispatch({ type: FETCH_MATCHES, payload: res.data });
 };
+
+export const searchConcerns = (guestName) => async dispatch => {
+  const res = await axios.get('/api/concern_search', guestName);
+
+  dispatch({ type: FETCH_SEARCH, payload: res.data});
+}

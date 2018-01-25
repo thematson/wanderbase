@@ -7,6 +7,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import ConcernNew from "./concerns/ConcernNew";
+import ConcernSearch from "./concerns/ConcernSearch";
 import ReactFileReader from "react-file-reader";
 
 class App extends Component {
@@ -16,6 +17,8 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
+
     return (
       <div>
         <BrowserRouter>
@@ -36,6 +39,7 @@ class App extends Component {
 
               <Route exact path="/concerns" component={Dashboard} />
               <Route path="/concerns/new" component={ConcernNew} />
+              <Route path="/concerns/search" component={ConcernSearch} />
             </div>
           </div>
         </BrowserRouter>

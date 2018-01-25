@@ -3,6 +3,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
+  renderTitle() {
+    switch (this.props.auth) {
+      case null:
+        return <span>wanderBase</span>;
+      case false:
+        return <span>wanderBase</span>;
+      default:
+        return <span>Welcome, {this.props.auth.userName} </span>;
+    }
+  }
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -28,18 +38,17 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper">
           <Link
-            to={this.props.auth ? '/concerns' : '/'}
+            to={this.props.auth ? "/concerns" : "/"}
             className="left brand-logo"
             // style={{ padding: "0 0 0 30px" }}
           >
-            wanderBase
+            {this.renderTitle()}
           </Link>
           <ul className="right" style={{ padding: "0 30px 0 0" }}>
             {this.renderContent()}
           </ul>
         </div>
       </nav>
-
     );
   }
 }

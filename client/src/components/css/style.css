@@ -94,3 +94,7 @@ form {
 .top {
   margin-top: 50px !important;
 }
+
+.s3 {
+  max-width: 33%;
+}

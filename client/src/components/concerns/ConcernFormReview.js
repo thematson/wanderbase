@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import formFields from './formFields';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
-import { formValueSelector } from 'redux-form';
 
 
 const ConcernFormReview = ({ onCancel, formValues, submitConcern, history }) => {

@@ -1,0 +1,119 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchConcerns } from "../../actions";
+import Dashboard from "../Dashboard";
+import { Button, Card, Row, Col } from "react-materialize";
+import Rodal from "rodal";
+
+import "rodal/lib/rodal.css";
+import { log } from "util";
+
+class ConcernsMatch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { visible: false };
+  }
+
+  show() {
+    this.setState = { visible: true };
+  }
+  hide() {
+    this.setState = { visible: false };
+  }
+
+  componentDidMount() {
+    this.props.fetchConcerns();
+    console.log(this.props.concerns);
+  }
+
+  renderMatches() {
+    let _ = require("underscore");
+    console.log(this.props);
+
+    const here = this.props;
+    console.log(here.concerns);
+    console.log(here.matchednames);
+    var matches = [];
+
+    for (var i = 0; i < here.concerns.length; i++) {
+      for (var j = 0; j < here.matchednames.length; j++) {
+        console.log(here.concerns[i].guestName);
+
+        if (
+          here.concerns[i].guestName.toUpperCase() ==
+          here.matchednames[j].toUpperCase()
+        ) {
+          if (matches.indexOf(here.concerns[i]) === -1) {
+            matches.push(here.concerns[i]);
+          }
+        }
+      }
+    }
+    console.log(matches);
+    const { visible } = this.state;
+
+    return matches.map(matches => {
+      var event = new Date();
+      var now = event.toLocaleDateString();
+      return (
+        <div>
+          <Card
+            className="card blue-grey darken-1"
+            textClassName="white-text"
+            onClick={() => this.setState({ visible: true })}
+          >
+            <span className="card-title">
+              {matches.guestName} from {matches.zipCode}
+            </span>
+            <p>{matches.descOfConcern}</p>
+            <p>Dated: {new Date(matches.dateRecorded).toLocaleDateString()}</p>
+            <p>By: {matches.clerkId}</p>
+            {!visible ? (
+              <div className="card-action">
+                <a>Recovery: {matches.descOfRecovery}</a>
+                <a>Dated: {matches.recoveryCheck}</a>
+              </div>
+            ) : null}
+            <div>
+              {/* <button>show</button> */}
+              {visible ? (
+                <div>
+                  <br />
+                  <div
+                    visible={this.state.visible}
+                    onClose={this.hide.bind(this)}
+                  >
+                    <div>
+                      <label>RECOVERY</label>
+                      <input
+                        type="text"
+                        name="descOfRecovery"
+                        placeholder="Please provide a description of the recovery."
+                      />
+                    </div>
+                    <div>
+                      <label>RECOVERY DATE</label>
+                      <input placeholder={now} readOnly />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </Card>
+        </div>
+      );
+    });
+  }
+
+  render() {
+    console.log(this.props);
+
+    return <div>{this.renderMatches()}</div>;
+  }
+}
+
+function mapStateToProps({ concerns }) {
+  return { concerns };
+}
+
+export default connect(mapStateToProps, { fetchConcerns })(ConcernsMatch);
