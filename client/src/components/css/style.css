@@ -69,17 +69,28 @@ form {
 }
 
 #concernreview {
-  margin-left: 25%;
-  margin-right: 25%;
+  width: 60%;
+  margin: 0 auto;
+  background: linear-gradient(cornflowerblue, skyblue);
+  padding: 20px 20px 20px 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #888888;
+  /* margin-left: 25%;
+  margin-right: 25%; */
+  background: linear-gradient(cornflowerblue, skyblue) !important;
 }
 
 #formSubmit {
   background-color: #00A5CF;
 }
 
-.results {
-  font-size: 25px;
+#splashlogo {
+  margin-top: 5%;
+}
 
+.results {
+  font-size: 20px;
+  color: aliceblue;
 }
 
 .input-field input:focus+label {
@@ -92,9 +103,250 @@ form {
 }
 
 .top {
-  margin-top: 50px !important;
+  margin-top: 7% !important;
 }
 
 .s3 {
   max-width: 33%;
+}
+
+#middlerows {
+  height: 40%;
+}
+
+#firstColumn {
+  min-height: 800px;
+}
+
+#searchButton {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  width: 90%;
+  height: 3rem;
+  font-size: larger;
+  background: linear-gradient(cornflowerblue, skyblue);
+  box-shadow: 5px 5px 8px #888888;
+}
+
+#searchButton:hover {
+  background: linear-gradient(dodgerblue, cornflowerblue);
+}
+
+#addButton {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  width: 90%;
+  height: 3rem;
+  font-size: larger;
+  background: linear-gradient(cornflowerblue, skyblue) !important;
+  box-shadow: 5px 5px 8px #888888;
+}
+
+#addButton:hover {
+  background: linear-gradient(dodgerblue, cornflowerblue) !important;
+}
+
+#uploadButton {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  width: 90%;
+  height: 3rem;
+  font-size: larger;
+  background: linear-gradient(cornflowerblue, skyblue);
+  box-shadow: 5px 5px 8px #888888;
+}
+
+#addButton:hover {
+  background: linear-gradient(dodgerblue, cornflowerblue);
+}
+
+#uploadButton:hover {
+  color: darkblue;
+  width: 90%;
+  height: 3rem;
+  font-size: larger;
+  background: linear-gradient(dodgerblue, cornflowerblue);
+}
+
+#secondColumn,
+#thirdColumn {
+  margin-left: 30px;
+}
+
+#matchCards{
+  background: linear-gradient(skyblue, cornflowerblue);
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-left: 0;
+}
+
+#matchCards.card-title {
+  font-size: 18px;
+  line-break: 20px;
+}
+
+input.recoveryInput {
+  margin: 0 !important;
+  color: antiquewhite !important;
+}
+
+.card-action a {
+  color: darkred !important;
+}
+
+.recoveryTag {
+  color: darkred !important;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: lightgray;
+  opacity: 1;
+  /* Firefox */
+}
+
+#concernForm ::placeholder {
+  color: black;
+  color: lightgray;
+}
+.recoveryInput {
+  color: blanchedalmond !important;
+}
+
+#textCrawl {
+  font-family: Pacifico;
+  color: midnightblue;
+}
+
+#searchResultDiv {
+  width: 60%;
+  margin: 0 auto;
+  background: linear-gradient(cornflowerblue, skyblue);
+  padding: 0px 20px 0px 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #888888;
+}
+
+.card-content {
+  box-shadow: 5px 5px 8px #888888;
+}
+
+#searchConcernForm {
+  padding: 20px 0 5px 0;
+
+}
+
+#searchConcernButton {
+  width: 100%;
+  height: 3rem;
+  vertical-align: middle;
+  background: linear-gradient(paleturquoise, cornflowerblue);
+  color: aliceblue;
+}
+
+#searchConcernButton:hover {
+ background: linear-gradient(dodgerblue, cornflowerblue) !important;
+}
+
+#searchConcernButton h5 {
+  margin: 0 auto;
+}
+
+#addConcernButton {
+  width: 100%;
+  height: 3rem;
+  vertical-align: middle;
+  background: linear-gradient(paleturquoise, cornflowerblue);
+  color: aliceblue;
+}
+#addConcernButton:hover {
+  background: linear-gradient(dodgerblue, cornflowerblue) !important;
+}
+
+#addConcernButton h5 {
+  margin: 0 auto;
+}
+
+.centeringDiv{
+
+  text-align: center;
+}
+
+
+
+.searchForm {
+  color: rgba(0, 0, 0, 0.74);
+}
+
+#searchUpdateForm {
+  margin: 0 !important;
+}
+
+#concernForm {
+   width: 60%;
+   margin: 0 auto;
+
+   background: linear-gradient(cornflowerblue, skyblue);
+   padding: 0 20px 0px 20px;
+   border-radius: 5px;
+   box-shadow: 5px 5px 8px #888888;
+}
+
+#concernFormForm {
+  padding: 20px 0 20px 0;
+
+}
+
+label {
+  color: rgba(0, 0, 0, 0.74);
+}
+
+.react-file-reader {
+  width: 100%;
+}
+
+#matchList {
+  width: 100%;
+}
+
+.btn-cancel {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 !important;
+}
+.btn-cancel:hover {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 !important;
+  font-size: 20px;
+}
+
+.delete-btn {
+  float: right;
+  color: #e74944;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+}
+
+#nothingHere {
+  color: black;
+  width: 90%;
+  text-align: center;
+
+}
+
+#nothingHereCard {
+  background: linear-gradient(gray, whitesmoke) !important;
+  color: aliceblue;
+}
+
+.reviewLabel{
+  margin: 0;
+  font-size: 1.5rem;
 }

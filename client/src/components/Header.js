@@ -10,7 +10,8 @@ class Header extends Component {
       case false:
         return <span>wanderBase</span>;
       default:
-        return <span>Welcome, {this.props.auth.userName} </span>;
+        return <span>wanderBase</span>;
+      // return <span>Welcome, {this.props.auth.userName} </span>;
     }
   }
   renderContent() {
@@ -26,7 +27,7 @@ class Header extends Component {
       default:
         return (
           <li>
-            <a href="/api/logout">Logout</a>
+            <a href="/api/logout">Logout, {this.props.auth.userName}</a>
           </li>
         );
     }

@@ -11,7 +11,6 @@ import formFields from "./formFields";
 class ConcernForm extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name, type, placeholder }) => {
-
       return (
         <Field
           key={name}
@@ -22,15 +21,16 @@ class ConcernForm extends Component {
           placeholder={placeholder}
         />
       );
-
     });
   }
 
   render() {
     return (
       <div className="top" id="concernForm">
-        <form onSubmit={this.props.handleSubmit(this.props.onConcernSubmit)}>
-
+        <form
+          id="concernFormForm"
+          onSubmit={this.props.handleSubmit(this.props.onConcernSubmit)}
+        >
           {this.renderFields()}
           {/* <div>
             <label htmlFor="filled-in-box">
@@ -47,16 +47,21 @@ class ConcernForm extends Component {
             <br />
           </div> */}
 
-          <Link to="/concerns" className="red btn-flat white-text">
-            Cancel
-          </Link>
           <button
             type="submit"
-            className="green lighten-1 btn-flat right white-text"
+            className="lighten-1 btn-flat white-text"
+            id="addConcernButton"
           >
-            Next
-            <i className="material-icons right">done</i>
+            <h5>
+              NEXT<i className="material-icons">done</i>
+            </h5>
           </button>
+          <br /><br/>
+          <div className="centeringDiv">
+            <Link to="/concerns" className="btn btn-cancel red-text">
+              CANCEL
+            </Link>
+          </div>
         </form>
       </div>
     );

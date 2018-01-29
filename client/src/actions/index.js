@@ -28,7 +28,21 @@ export const fetchConcerns = () => async dispatch => {
 };
 
 export const searchConcerns = (guestName) => async dispatch => {
-  const res = await axios.get('/api/concern_search', guestName);
+  console.log(guestName);
+
+  const res = await axios.get('/api/concern_search', { params : {guestName}});
+  console.log("this is this sdfasfsdfnsdjkfnsd", res);
+  console.log(res.data);
 
   dispatch({ type: FETCH_SEARCH, payload: res.data});
 }
+
+
+//  console.log(guestName);
+
+//   const res = await axios.get('/api/concern_search', { params : {guestName}});
+//   console.log("this is this sdfasfsdfnsdjkfnsd", res);
+//   console.log(res.data);
+
+
+//   dispatch({ type: FETCH_SEARCH, payload: res.data});

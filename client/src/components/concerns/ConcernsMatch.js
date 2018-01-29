@@ -4,6 +4,7 @@ import { fetchConcerns } from "../../actions";
 import Dashboard from "../Dashboard";
 import { Button, Card, Row, Col } from "react-materialize";
 import Rodal from "rodal";
+import { Link } from "react-router-dom";
 
 import "rodal/lib/rodal.css";
 import { log } from "util";
@@ -11,7 +12,9 @@ import { log } from "util";
 class ConcernsMatch extends Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = { visible: false,
+                    // searchComplete: false
+                  };
   }
 
   show() {
@@ -21,9 +24,14 @@ class ConcernsMatch extends Component {
     this.setState = { visible: false };
   }
 
+  // searchComplete() {
+  //   this.setState = { searchComplete : true };
+  // }
   componentDidMount() {
     this.props.fetchConcerns();
     console.log(this.props.concerns);
+    console.log(this.props);
+
   }
 
   renderMatches() {
@@ -49,17 +57,33 @@ class ConcernsMatch extends Component {
         }
       }
     }
+
     console.log(matches);
     const { visible } = this.state;
+
+    if (matches.length === 0 && here.searchComplete) {
+      return (
+        <div id="nothingHere">
+          <Card id="nothingHereCard">
+            <h5>There are no Arrivals with Concerns</h5>
+          </Card>
+        </div>
+      )
+
+    } else {
 
     return matches.map(matches => {
       var event = new Date();
       var now = event.toLocaleDateString();
+      console.log(matches.guestName);
+
       return (
         <div>
           <Card
-            className="card blue-grey darken-1"
+            key={matches._id}
+            className="card"
             textClassName="white-text"
+            id="matchCards"
             onClick={() => this.setState({ visible: true })}
           >
             <span className="card-title">
@@ -68,6 +92,7 @@ class ConcernsMatch extends Component {
             <p>{matches.descOfConcern}</p>
             <p>Dated: {new Date(matches.dateRecorded).toLocaleDateString()}</p>
             <p>By: {matches.clerkId}</p>
+
             {!visible ? (
               <div className="card-action">
                 <a>Recovery: {matches.descOfRecovery}</a>
@@ -84,17 +109,38 @@ class ConcernsMatch extends Component {
                     onClose={this.hide.bind(this)}
                   >
                     <div>
-                      <label>RECOVERY</label>
+                      <label className="recoveryTag">RECOVERY</label>
                       <input
                         type="text"
                         name="descOfRecovery"
                         placeholder="Please provide a description of the recovery."
+                        className="recoveryInput"
                       />
                     </div>
                     <div>
-                      <label>RECOVERY DATE</label>
-                      <input placeholder={now} readOnly />
+                      <label className="recoveryTag">RECOVERY DATE</label>
+                      <input
+                        placeholder={now}
+                        readOnly
+                        className="recoveryInput"
+                      />
                     </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="lighten-1 btn-flat white-text"
+                    id="addConcernButton"
+                  >
+                    <h5>
+                      NEXT<i className="material-icons">done</i>
+                    </h5>
+                  </button>
+                  <br />
+                  <br />
+                  <div className="centeringDiv">
+                    <Link to="/concerns" className=" btn btn-cancel red-text">
+                      CANCEL
+                    </Link>
                   </div>
                 </div>
               ) : null}
@@ -102,13 +148,13 @@ class ConcernsMatch extends Component {
           </Card>
         </div>
       );
-    });
+    })};
   }
 
   render() {
     console.log(this.props);
 
-    return <div>{this.renderMatches()}</div>;
+    return <div id="matchList">{this.renderMatches()}</div>;
   }
 }
 

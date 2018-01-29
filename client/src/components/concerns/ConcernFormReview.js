@@ -11,8 +11,8 @@ const ConcernFormReview = ({ onCancel, formValues, submitConcern, history }) => 
 
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
-      <div key={name}>
-        <label>{label}</label>
+      <div key={name} id="reviewDiv">
+        <label className="reviewLabel">{label}</label>
         <div className="results">
           {formValues[name] || "N/A"}
         </div>

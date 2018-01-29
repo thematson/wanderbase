@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
-import {
-  reduxForm,
-  Field,
-  formValueSelector,
-  values,
-  formValues,
-  fieldInputPropTypes,
-  Fields
-} from "redux-form";
-import { Link } from "react-router-dom";
-import { fetchConcerns } from "../../actions";
 import { searchConcerns } from "../../actions";
 import ConcernField from "./ConcernField";
-import formFields from "./formFields";
-import Dashboard from "../Dashboard";
-import index from "react-file-reader";
-import { log } from "util";
+import SearchResult from "./SearchResult";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 class ConcernSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
       guestName: "",
-      zipCode: ""
+      zipCode: "",
+      matches: []
     };
 
     this.handleName = this.handleName.bind(this);
@@ -40,65 +28,82 @@ class ConcernSearch extends Component {
     this.setState({ zipCode: event.target.value });
   }
 
-  componentDidMount() {
-    this.props.searchConcerns();
-    console.log(this.props);
+  // componentDidMount() {
 
-  }
+  //   console.log(this.props);
+
+  // }
 
   handleSubmit(event) {
-    const guestName = this.state.guestName;
-    console.log(guestName);
-
-    searchConcerns(guestName);
     event.preventDefault();
-    console.log(event);
 
+    const guestName = this.state.guestName;
+    const zipCode = this.state.zipCode;
+    axios
+      .get("/api/concern_search", { params: { guestName, zipCode } })
+      .then(res => {
+        console.log(res);
+
+        this.setState({
+          matches: res.data
+        });
+      });
   }
 
   render() {
-    console.log(this);
-
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>First Name</label>
+        <div id="searchResultDiv">
+          <form id="searchConcernForm" onSubmit={this.handleSubmit}>
             <div>
-              <input
-                name="guestName"
-                value={this.state.guestName}
-                onChange={this.handleName}
-                component="input"
-                type="text"
-                placeholder="LAST/FIRST"
-              />
+              <label className="searchForm">Guest Name</label>
+              <div>
+                <input
+                  name="guestName"
+                  value={this.state.guestName}
+                  onChange={this.handleName}
+                  component="input"
+                  type="text"
+                  placeholder="LAST/FIRST"
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Zip Code</label>
             <div>
-              <input
-                name="zipCode"
-                value={this.state.zipCode}
-                onChange={this.handleZip}
-                component="input"
-                type="text"
-                placeholder="ZIP CODE"
-              />
+              <label className="searchForm">Zip Code</label>
+              <div>
+                <input
+                  name="zipCode"
+                  value={this.state.zipCode}
+                  onChange={this.handleZip}
+                  component="input"
+                  type="text"
+                  placeholder="ZIP CODE"
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
+            <div>
+              <button id="searchConcernButton" type="submit">
+                <h5>SEARCH</h5>
+              </button>
+            </div>
+            <div className="centeringDiv">
+              <Link to="/concerns" className="btn btn-cancel red-text">
+                Cancel
+              </Link>
+            </div>
+          </form>
+        </div>
+        <div>
+          <SearchResult matches={this.state.matches} />
+        </div>
       </div>
     );
   }
 }
 
-function  mapStateToProps({ matches }){
+function mapStateToProps({ matches }) {
   return { matches };
+  console.log(this.props);
 }
 
 export default connect(mapStateToProps, { searchConcerns })(ConcernSearch);

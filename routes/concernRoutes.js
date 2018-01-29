@@ -1,10 +1,12 @@
+// import { read } from "fs";
+
 const _ = require("lodash");
 const Path = require("path-parser");
 const { URL } = require("url");
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
-const Mailer = require("../services/Mailer");
-const emailResponse = require("../services/emailResponse");
+// const Mailer = require("../services/Mailer");
+// const emailResponse = require("../services/emailResponse");
 
 const nodemailer = require("nodemailer");
 
@@ -18,6 +20,31 @@ var transporter = nodemailer.createTransport({
 });
 
 module.exports = app => {
+  app.delete('/api/concerns/:_id'), requireLogin , async (req, res) => {
+     Concern.findById({ _id: req.params.id })
+      .then(dbModel => dbModel.remove())
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
+
+  app.post('/api/concerns_update'), requireLogin, async (req,res) => {
+    console.log("newest route hit!!!!!!@@@@@@@@@@");
+    console.log(req.query);
+  }
+
+  app.get('/api/concerns', requireLogin, async (req, res) => {
+    const concerns = await Concern.find({}).sort({dateRecorded: -1})
+    res.send(concerns);
+  });
+
+  app.get('/api/concern_search', async (req, res) => {
+    console.log("this route is hit!!!!!!!!!!!!!!!!!!!!!");
+    console.log(req.query);
+
+    const search = await Concern.find({ guestName: req.query.guestName, zipCode: req.query.zipCode })
+    res.send(search);
+  })
+
   app.post("/api/concerns", requireLogin, async (req, res) => {
 
     const {
@@ -36,14 +63,13 @@ module.exports = app => {
       descOfConcern,
       clerkId,
       recipients,
-      recoveryCheck,
-      descOfRecovery,
+      recoveryCheck : recoveryCheck || "N/A",
+      descOfRecovery : descOfRecovery || "N/A",
       _user: req.user.id,
       dateRecorded: Date.now()
     });
 
     console.log(concern);
-
 
     const mailOptions = {
       from: "noreply@wanderbase.com", // sender address
@@ -51,22 +77,16 @@ module.exports = app => {
       subject: "wanderBase Activity", // Subject line
       html: "<p>There has been activity on wanderBase</p>" // plain text body
     };
-
     console.log(recipients);
-
-    try{
+    try {
       await transporter.sendMail(mailOptions, function(err, info) {
         if (err) console.log(err);
         else console.log(info);
       });
-
       await concern.save();
+      res.send();
     } catch (err) {
       res.status(422).send(err);
     }
-
-    //send email here?
-    // const mailer = new Mailer(issue, emailResponse(issue));
-    // mailer.send();
   });
 };

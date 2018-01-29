@@ -1,5 +1,5 @@
 export default [
-  { label: "Guest Name", name: "guestName", type: "text", placeholder: "Last/First" },
+  { label: "Guest Name", name: "guestName", type: "text", placeholder: "LAST/FIRST" },
 
   { label: "Guest Zip Code", name: "zipCode", type: "text" },
   {
@@ -16,14 +16,14 @@ export default [
     type: "text"
   },
   {
-    label: "Recovery Date (mm/dd/yy)",
-    name: "recoveryCheck",
+    label: "Description of Recovery",
+    name: "descOfRecovery",
     type: "text",
     placeholder: "If no recovery, leave blank"
   },
   {
-    label: "Description of Recovery",
-    name: "descOfRecovery",
+    label: "Recovery Date (mm/dd/yy)",
+    name: "recoveryCheck",
     type: "text",
     placeholder: "If no recovery, leave blank"
   }
