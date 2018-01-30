@@ -99,7 +99,7 @@ class Dashboard extends Component {
               id="textCrawl"
               items={[
                 "The best way to find yourself is to lose yourself in the service of others. - Ghandi",
-                "People will forget what you said, forget what you did, but people will never forget how you made them feel - Maya Angelou",
+                "People will forget what you said - forget what you did - but people will never forget how you made them feel - Maya Angelou",
                 "Do what you do so well that they want to see it again and bring their friends. - Walt Disney",
                 "Hospitality is making your guests feel like they're at home, even if you wish they were. - Justine Vogt"
               ]}

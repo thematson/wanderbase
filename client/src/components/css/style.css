@@ -125,12 +125,13 @@ form {
   width: 90%;
   height: 3rem;
   font-size: larger;
-  background: linear-gradient(cornflowerblue, skyblue);
-  box-shadow: 5px 5px 8px #888888;
+  background: #a7bee7;
+  box-shadow: 2px 2px 8px #888888;
+  border-radius: 0 !important;
 }
 
 #searchButton:hover {
-  background: linear-gradient(dodgerblue, cornflowerblue);
+  background: #778eb5;
 }
 
 #addButton {
@@ -140,12 +141,13 @@ form {
   width: 90%;
   height: 3rem;
   font-size: larger;
-  background: linear-gradient(cornflowerblue, skyblue) !important;
-  box-shadow: 5px 5px 8px #888888;
+  background: #a7bee7 !important;
+  box-shadow: 2px 2px 8px #888888;
+  border-radius: 0 !important;
 }
 
 #addButton:hover {
-  background: linear-gradient(dodgerblue, cornflowerblue) !important;
+  background: #778eb5 !important;
 }
 
 #uploadButton {
@@ -155,12 +157,13 @@ form {
   width: 90%;
   height: 3rem;
   font-size: larger;
-  background: linear-gradient(cornflowerblue, skyblue);
-  box-shadow: 5px 5px 8px #888888;
+  background: #a7bee7;
+  box-shadow: 2px 2px 8px #888888;
+  border-radius: 0 !important;
 }
 
 #addButton:hover {
-  background: linear-gradient(dodgerblue, cornflowerblue);
+  background: #778eb5;
 }
 
 #uploadButton:hover {
@@ -168,7 +171,7 @@ form {
   width: 90%;
   height: 3rem;
   font-size: larger;
-  background: linear-gradient(dodgerblue, cornflowerblue);
+  background: #778eb5;
 }
 
 #secondColumn,
@@ -176,17 +179,29 @@ form {
   margin-left: 30px;
 }
 
+.card-title {
+  line-height: 3rem !important;
+  text-indent: 1rem;
+  background: #778eb5;
+}
 #matchCards{
-  background: linear-gradient(skyblue, cornflowerblue);
-  width: 90%;
+  background: whitesmoke;
+  color: black;
+  width: 60%;
+  display: inherit;
   margin: 0 auto;
-  margin-top: 10px;
-  margin-left: 0;
+  border: 0;
 }
 
 #matchCards.card-title {
   font-size: 18px;
   line-break: 20px;
+}
+
+#matchCards p{
+  text-indent: 1rem;
+  color: black;
+  text-transform: uppercase;
 }
 
 input.recoveryInput {
@@ -225,18 +240,17 @@ input.recoveryInput {
 #searchResultDiv {
   width: 60%;
   margin: 0 auto;
-  background: linear-gradient(cornflowerblue, skyblue);
-  padding: 0px 20px 0px 20px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 8px #888888;
+  background: whitesmoke;
+  border-radius: 0;
+  box-shadow: 2px 2px 8px #888888;
 }
 
 .card-content {
   box-shadow: 5px 5px 8px #888888;
+  padding: 0 0 10px 0 !important;
 }
 
 #searchConcernForm {
-  padding: 20px 0 5px 0;
 
 }
 
@@ -244,12 +258,12 @@ input.recoveryInput {
   width: 100%;
   height: 3rem;
   vertical-align: middle;
-  background: linear-gradient(paleturquoise, cornflowerblue);
+  background-color: #a7bee7;
   color: aliceblue;
 }
 
 #searchConcernButton:hover {
- background: linear-gradient(dodgerblue, cornflowerblue) !important;
+ background: #778eb5 !important;
 }
 
 #searchConcernButton h5 {
@@ -260,7 +274,7 @@ input.recoveryInput {
   width: 100%;
   height: 3rem;
   vertical-align: middle;
-  background: linear-gradient(paleturquoise, cornflowerblue);
+  background-color: #a7bee7;
   color: aliceblue;
 }
 #addConcernButton:hover {
@@ -276,14 +290,37 @@ input.recoveryInput {
   text-align: center;
 }
 
+input {
+  text-indent: 1rem;
+}
 
 
 .searchForm {
+  text-transform: uppercase;
   color: rgba(0, 0, 0, 0.74);
+  background: #778eb5;
+  width: 100% !important;
+  line-height: 3rem;
+  display: inline-block;
+  padding-left: 1rem;
 }
 
 #searchUpdateForm {
   margin: 0 !important;
+
+}
+
+#searchUpdateForm label {
+  width: 100%;
+  background: #d9f0ff;
+  text-indent: 1rem;
+  display: inline-block;
+}
+
+#searchUpdateForm button {
+  width: 100%;
+  border: 0;
+  background: #778eb5;
 }
 
 #concernForm {
@@ -317,12 +354,13 @@ label {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   box-shadow: 0 0 0 0 !important;
+  font-size: .7rem;
 }
 .btn-cancel:hover {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   box-shadow: 0 0 0 0 !important;
-  font-size: 20px;
+  font-size: 1rem;
 }
 
 .delete-btn {
@@ -349,4 +387,21 @@ label {
 .reviewLabel{
   margin: 0;
   font-size: 1.5rem;
+}
+
+.searchResultCard {
+  width: 60%;
+  margin: 0 auto;
+  background-color: whitesmoke;
+}
+
+.searchResultCard p {
+  text-indent: 1rem !important;
+  text-transform: uppercase;
+  color: black !important;
+}
+
+.btn-floating {
+  margin-left: 1rem;
+  background: gray;
 }

@@ -48,17 +48,15 @@ class SearchResult extends Component {
           recoveryUpdates: res.data
         });
       });
-
   }
 
   render() {
-    const  visible  = this.state.visible;
+    const visible = this.state.visible;
     console.log(this.props);
     console.log(this.state);
     console.log(new Date().toLocaleDateString());
     var event = new Date();
     var now = event.toLocaleDateString();
-
 
     return this.props.matches.map(match => {
       let recovery = match.descOfRecovery;
@@ -72,7 +70,7 @@ class SearchResult extends Component {
       return (
         <div key={match._id}>
           <Card
-            className="card blue-grey darken-1"
+            className="card searchResultCard"
             textClassName="white-text"
             onClick={() => this.setState({ visible: true })}
           >
@@ -113,7 +111,11 @@ class SearchResult extends Component {
                       <label>RECOVERY DATE</label>
                       <input placeholder={now} readOnly />
                     </div>
-                    <button type="submit">SUBMIT</button>
+                    <a class="btn-floating btn-large waves-effect waves-light">
+                      <i class="material-icons">add</i>
+                    </a>
+
+                    {/* <button type="submit">SUBMIT</button> */}
                   </form>
                 </div>
               ) : null}
