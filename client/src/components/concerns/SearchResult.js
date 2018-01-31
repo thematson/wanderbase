@@ -35,7 +35,7 @@ class SearchResult extends Component {
     const descOfRecovery = this.state.descOfRecovery;
     const recoveryCheck = this.state.recoveryCheck;
     axios
-      .put("/api/concerns_update", {
+      .post("/api/concerns_update", {
         params: {
           guestName,
           zipCode,
@@ -111,11 +111,11 @@ class SearchResult extends Component {
                       <label>RECOVERY DATE</label>
                       <input placeholder={now} readOnly />
                     </div>
-                    <a class="btn-floating btn-large waves-effect waves-light">
+                    {/* <a class="btn-floating btn-large waves-effect waves-light">
                       <i class="material-icons">add</i>
-                    </a>
+                    </a> */}
 
-                    {/* <button type="submit">SUBMIT</button> */}
+                    <button type="submit" >SUBMIT</button>
                   </form>
                 </div>
               ) : null}

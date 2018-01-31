@@ -1,5 +1,7 @@
 // import { read } from "fs";
 
+// import { read } from "fs";
+
 const _ = require("lodash");
 const Path = require("path-parser");
 const { URL } = require("url");
@@ -20,17 +22,25 @@ var transporter = nodemailer.createTransport({
 });
 
 module.exports = app => {
-  app.delete('/api/concerns/:_id'), requireLogin , async (req, res) => {
+  app.delete('/api/concerns/:_id', requireLogin , async (req, res) => {
      Concern.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  });
 
-  app.post('/api/concerns_update'), requireLogin, async (req,res) => {
+  app.post('/api/concerns_update', requireLogin, async (req,res) => {
     console.log("newest route hit!!!!!!@@@@@@@@@@");
-    console.log(req.query);
-  }
+    const update = await Concern.findOneAndRemove(
+        {guestName: req.query.guestName, zipCode: req.query.zipCode},
+        { $set: { descOfConcern: req.query.descOfRecovery,
+          recoveryCheck: req.query.recoveryCheck}},
+        {
+          returnNewDocument: true
+        }
+      )
+    res.send(update);
+  });
 
   app.get('/api/concerns', requireLogin, async (req, res) => {
     const concerns = await Concern.find({}).sort({dateRecorded: -1})
