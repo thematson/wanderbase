@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import { Button, Card, Row, Col } from "react-materialize";
+import ReactDOM from "react-dom";
+import Modal from "react-modal";
 import axios from "axios";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
 
 class SearchResult extends Component {
   constructor(props) {
@@ -10,10 +23,27 @@ class SearchResult extends Component {
       descOfRecovery: "",
       recoveryCheck: new Date().toLocaleDateString(),
       recoveryUpdates: [],
-      areMatches: true
+      areMatches: true,
+      modalIsOpen: false
     };
     this.handleRecovery = this.handleRecovery.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = "#f00";
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
   }
 
   show() {
@@ -29,28 +59,37 @@ class SearchResult extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.props);
+    console.log(this.state);
 
-    const guestName = this.props.matches.guestName;
-    const zipCode = this.props.matches.zipCode;
+    const id = this.props.matches[0]._id;
+    const guestName = this.props.matches[0].guestName;
+    const zipCode = this.props.matches[0].zipCode;
     const descOfRecovery = this.state.descOfRecovery;
     const recoveryCheck = this.state.recoveryCheck;
     axios
       .post("/api/concerns_update", {
         params: {
-          guestName,
-          zipCode,
+          id,
           descOfRecovery,
           recoveryCheck
         }
       })
       .then(res => {
+        console.log(res);
+
         this.setState({
           recoveryUpdates: res.data
         });
       });
+    document.getElementById("searchDiv").innerHTML = "";
+    document.getElementById("searchNameInput").value = "";
+    document.getElementById("searchZipInput").value = "";
   }
 
   render() {
+    console.log(this.props.matches);
+
     const visible = this.state.visible;
     console.log(this.props);
     console.log(this.state);
@@ -67,9 +106,18 @@ class SearchResult extends Component {
       if (!recoverycheck) {
         recoverycheck = "N/A";
       }
+
+      //   if (!match._id) {
+      //   return (
+      //     <div className="noMatches">
+      //     <h1 style={{ color: 'black' }}>There are no matches</h1>
+      //     </div>
+      //   )
+      // } else {
       return (
-        <div key={match._id}>
+        <div id="searchDiv">
           <Card
+            key={match._id}
             className="card searchResultCard"
             textClassName="white-text"
             onClick={() => this.setState({ visible: true })}
@@ -104,6 +152,7 @@ class SearchResult extends Component {
                       <input
                         type="text"
                         name="descOfRecovery"
+                        onChange={this.handleRecovery}
                         placeholder="Please provide a description of the recovery."
                       />
                     </div>
@@ -115,8 +164,22 @@ class SearchResult extends Component {
                       <i class="material-icons">add</i>
                     </a> */}
 
-                    <button type="submit" >SUBMIT</button>
+                    <button type="submit" onClick={this.openModal}>
+                      SUBMIT
+                    </button>
                   </form>
+                  <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                  >
+                    <h4 ref={subtitle => (this.subtitle = subtitle)}>Update Successful!</h4>
+                    <div>The recovery for {match.guestName} has been recorded.</div>
+                    <br/>
+                    <button onClick={this.closeModal}>close</button>
+                  </Modal>
                 </div>
               ) : null}
             </div>

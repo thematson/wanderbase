@@ -22,41 +22,56 @@ var transporter = nodemailer.createTransport({
 });
 
 module.exports = app => {
-  app.delete('/api/concerns/:_id', requireLogin , async (req, res) => {
-     Concern.findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+  app.delete("/api/concerns/:_id", requireLogin, async (req, res) => {
+    console.log("DELEEeeeetteeddddd");
+    console.log(req.params);
+
+    const deleteThis = await Concern.deleteOne({ _id: req.params._id }).catch(
+      err => res.status(422).json(err)
+    );
+    res.send(deleteThis);
   });
 
-  app.post('/api/concerns_update', requireLogin, async (req,res) => {
+  app.post("/api/concerns_update", requireLogin, async (req, res) => {
     console.log("newest route hit!!!!!!@@@@@@@@@@");
-    const update = await Concern.findOneAndRemove(
-        {guestName: req.query.guestName, zipCode: req.query.zipCode},
-        { $set: { descOfConcern: req.query.descOfRecovery,
-          recoveryCheck: req.query.recoveryCheck}},
-        {
-          returnNewDocument: true
+    console.log(req.body);
+    console.log(req.body.params.descOfRecovery);
+    console.log("id is " + req.body.params.id);
+
+    const update = await Concern.update(
+      { _id: req.body.params.id },
+      {
+        $set: {
+          descOfRecovery: req.body.params.descOfRecovery,
+          recoveryCheck: req.body.params.recoveryCheck
         }
-      )
+      },
+      {
+        new: true
+      }
+    );
+    console.log(update);
+
     res.send(update);
   });
 
-  app.get('/api/concerns', requireLogin, async (req, res) => {
-    const concerns = await Concern.find({}).sort({dateRecorded: -1})
+  app.get("/api/concerns", requireLogin, async (req, res) => {
+    const concerns = await Concern.find({}).sort({ dateRecorded: -1 });
     res.send(concerns);
   });
 
-  app.get('/api/concern_search', async (req, res) => {
+  app.get("/api/concern_search", async (req, res) => {
     console.log("this route is hit!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.query);
 
-    const search = await Concern.find({ guestName: req.query.guestName, zipCode: req.query.zipCode })
+    const search = await Concern.find({
+      guestName: req.query.guestName,
+      zipCode: req.query.zipCode
+    });
     res.send(search);
-  })
+  });
 
   app.post("/api/concerns", requireLogin, async (req, res) => {
-
     const {
       guestName,
       zipCode,
@@ -73,8 +88,8 @@ module.exports = app => {
       descOfConcern,
       clerkId,
       recipients,
-      recoveryCheck : recoveryCheck || "N/A",
-      descOfRecovery : descOfRecovery || "N/A",
+      recoveryCheck: recoveryCheck || "N/A",
+      descOfRecovery: descOfRecovery || "N/A",
       _user: req.user.id,
       dateRecorded: Date.now()
     });

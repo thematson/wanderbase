@@ -71,13 +71,18 @@ form {
 #concernreview {
   width: 60%;
   margin: 0 auto;
-  background: linear-gradient(cornflowerblue, skyblue);
-  padding: 20px 20px 20px 20px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 8px #888888;
+  background: whitesmoke;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 5px #888888;
   /* margin-left: 25%;
   margin-right: 25%; */
-  background: linear-gradient(cornflowerblue, skyblue) !important;
+  background: whitesmoke !important;
+}
+
+#concernreview h5{
+  text-indent: 10px;
+  background: #778eb5;
+  line-height: 2.8rem;
 }
 
 #formSubmit {
@@ -89,8 +94,12 @@ form {
 }
 
 .results {
-  font-size: 20px;
-  color: aliceblue;
+  width: 95%;
+  margin: 0 auto;
+  text-indent: 10px;
+  font-size: 1.2rem;
+  color: black;
+  background: #d9f0ff;
 }
 
 .input-field input:focus+label {
@@ -302,7 +311,7 @@ input {
   width: 100% !important;
   line-height: 3rem;
   display: inline-block;
-  padding-left: 1rem;
+  margin: 0 !important;
 }
 
 #searchUpdateForm {
@@ -315,6 +324,7 @@ input {
   background: #d9f0ff;
   text-indent: 1rem;
   display: inline-block;
+  margin: 0 !important;
 }
 
 #searchUpdateForm button {
@@ -327,19 +337,28 @@ input {
    width: 60%;
    margin: 0 auto;
 
-   background: linear-gradient(cornflowerblue, skyblue);
-   padding: 0 20px 0px 20px;
-   border-radius: 5px;
-   box-shadow: 5px 5px 8px #888888;
+   background: whitesmoke;
+   /* padding: 0 20px 0px 20px; */
+   border-radius: 0px;
+   box-shadow: 2px 2px 5px #888888;
 }
 
 #concernFormForm {
-  padding: 20px 0 20px 0;
+ padding-top: 20px;
 
 }
 
+.formDiv label {
+  text-indent: 10px;
+  width: 100% !important;
+  background: #778eb5;
+}
+
 label {
+  margin-left: 10px;
+  text-indent: 10px !important;
   color: rgba(0, 0, 0, 0.74);
+
 }
 
 .react-file-reader {
@@ -384,14 +403,18 @@ label {
   color: aliceblue;
 }
 
-.reviewLabel{
-  margin: 0;
-  font-size: 1.5rem;
+label.reviewLabel {
+ width: 90%;
+ margin: 0 auto;
+
+  font-size: 1.3rem;
+  color: gray;
 }
 
 .searchResultCard {
   width: 60%;
   margin: 0 auto;
+  margin-bottom: 10%;
   background-color: whitesmoke;
 }
 
@@ -404,4 +427,45 @@ label {
 .btn-floating {
   margin-left: 1rem;
   background: gray;
+}
+
+.confirmDelete {
+  background: #d9f0ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 2rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-variant: small-caps;
+  border: 1px solid red;
+  border-right: 5px solid red;
+
+
+}
+
+.cancelText {
+  cursor: pointer;
+}
+
+.noResults {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 0px !important;
+  box-shadow: 1px 1px 2px black !important;
+  vertical-align: middle;
+  text-transform: uppercase;
+  padding-top: .6rem;
+
+}
+
+#submitConcernButton {
+  text-align: center;
+  width: 100%;
+  background: #a7bee7;
+  line-height: 2.7rem;
+  font-size: 2rem;
 }

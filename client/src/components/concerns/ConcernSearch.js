@@ -4,6 +4,8 @@ import { searchConcerns } from "../../actions";
 import ConcernField from "./ConcernField";
 import SearchResult from "./SearchResult";
 import axios from "axios";
+import { Button, Card, Row, Col } from "react-materialize";
+
 import { Link } from "react-router-dom";
 
 class ConcernSearch extends Component {
@@ -12,7 +14,8 @@ class ConcernSearch extends Component {
     this.state = {
       guestName: "",
       zipCode: "",
-      matches: []
+      matches: [],
+      submission: false
     };
 
     this.handleName = this.handleName.bind(this);
@@ -36,6 +39,11 @@ class ConcernSearch extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state.submission);
+    this.setState({ submission: true });
+    console.log(this.state.submission);
+
+
 
     const guestName = this.state.guestName;
     const zipCode = this.state.zipCode;
@@ -48,9 +56,20 @@ class ConcernSearch extends Component {
           matches: res.data
         });
       });
+    console.log((this.state.submission));
+      console.log(this.state.matches);
+
   }
 
   render() {
+    if (this.state.matches.length === 0 && this.state.submission === true) {
+      return (
+      <div className="top">
+      <Card>
+      NADA!!!!
+      </Card>
+      </div>
+    ) } else {
     return (
       <div>
         <div id="searchResultDiv">
@@ -60,6 +79,7 @@ class ConcernSearch extends Component {
               <div>
                 <input
                   name="guestName"
+                  id="searchNameInput"
                   value={this.state.guestName}
                   onChange={this.handleName}
                   component="input"
@@ -73,6 +93,7 @@ class ConcernSearch extends Component {
               <div>
                 <input
                   name="zipCode"
+                  id="searchZipInput"
                   value={this.state.zipCode}
                   onChange={this.handleZip}
                   component="input"
@@ -98,7 +119,7 @@ class ConcernSearch extends Component {
         </div>
       </div>
     );
-  }
+  }}
 }
 
 function mapStateToProps({ matches }) {

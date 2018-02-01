@@ -1,21 +1,22 @@
 // ConcernFormReview shows users their form inputs for review
-import _ from 'lodash';
-import React from 'react';
-import { connect } from 'react-redux';
-import formFields from './formFields';
-import { withRouter } from 'react-router-dom';
-import * as actions from '../../actions';
+import _ from "lodash";
+import React from "react";
+import { connect } from "react-redux";
+import formFields from "./formFields";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions";
 
-
-const ConcernFormReview = ({ onCancel, formValues, submitConcern, history }) => {
-
+const ConcernFormReview = ({
+  onCancel,
+  formValues,
+  submitConcern,
+  history
+}) => {
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
       <div key={name} id="reviewDiv">
         <label className="reviewLabel">{label}</label>
-        <div className="results">
-          {formValues[name] || "N/A"}
-        </div>
+        <div className="results">{formValues[name] || "N/A"}</div>
       </div>
     );
   });
@@ -24,20 +25,24 @@ const ConcernFormReview = ({ onCancel, formValues, submitConcern, history }) => 
     <div className="top" id="concernreview">
       <h5>Please confirm your entries</h5>
       {reviewFields}
+      <br />
+      <div id="submitConcernButton">
+        <span onClick={() => submitConcern(formValues, history)}>
+          Submit Concern<i className="material-icons">email</i>
+        </span>
+      </div>
+      <br />
 
-      <button
-        className="yellow darken-3 white-text btn-flat"
-        onClick={onCancel}
-      >
-        Back
-      </button>
-      <button
+      <span className="cancelText" onClick={onCancel}>
+        <i class="material-icons">backspace</i>&nbsp; <h6></h6>
+      </span>
+      {/* <button
         onClick={() => submitConcern(formValues, history)}
         className="green btn-flat right white-text"
       >
         Submit Concern
         <i className="material-icons right">email</i>
-      </button>
+      </button> */}
     </div>
   );
 };

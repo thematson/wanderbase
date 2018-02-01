@@ -12,14 +12,17 @@ class ConcernForm extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name, type, placeholder }) => {
       return (
-        <Field
-          key={name}
-          component={ConcernField}
-          type={type}
-          label={label}
-          name={name}
-          placeholder={placeholder}
-        />
+        <div>
+          <Field
+            className="formDiv"
+            key={name}
+            component={ConcernField}
+            type={type}
+            label={label}
+            name={name}
+            placeholder={placeholder}
+          />
+        </div>
       );
     });
   }
@@ -53,10 +56,11 @@ class ConcernForm extends Component {
             id="addConcernButton"
           >
             <h5>
-              NEXT<i className="material-icons">done</i>
+              NEXT &nbsp;<i className="material-icons">navigate_next</i>
             </h5>
           </button>
-          <br /><br/>
+          <br />
+          <br />
           <div className="centeringDiv">
             <Link to="/concerns" className="btn btn-cancel red-text">
               CANCEL
