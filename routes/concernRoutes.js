@@ -100,7 +100,8 @@ module.exports = app => {
       from: "noreply@wanderbase.com", // sender address
       to: recipients, // list of receivers
       subject: "wanderBase Activity", // Subject line
-      html: "<p>There has been activity on wanderBase</p>" // plain text body
+      html:
+        "<p>There has been activity on wanderBase. <a href='https://pure-sea-27226.herokuapp.com/'>Click to visit app.</a></p><br/>Brought to you by <a href='http://ericmatson.io/'>Eric Matson</a>" // plain text body
     };
     console.log(recipients);
     try {

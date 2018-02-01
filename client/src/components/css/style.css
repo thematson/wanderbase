@@ -79,10 +79,13 @@ form {
   background: whitesmoke !important;
 }
 
-#concernreview h5{
-  text-indent: 10px;
+#reviewHeader {
+  text-align: center;
   background: #778eb5;
+  font-size: 1.8rem !important;
   line-height: 2.8rem;
+  width: 100% !important;
+  color: whitesmoke;
 }
 
 #formSubmit {
@@ -99,7 +102,7 @@ form {
   text-indent: 10px;
   font-size: 1.2rem;
   color: black;
-  background: #d9f0ff;
+  background: whitesmoke;
 }
 
 .input-field input:focus+label {
@@ -309,7 +312,7 @@ input.recoveryInput {
   color: aliceblue;
 }
 #addConcernButton:hover {
-  background: linear-gradient(dodgerblue, cornflowerblue) !important;
+  background: #778eb5 !important;
 }
 
 #addConcernButton h5 {
@@ -473,6 +476,11 @@ label.reviewLabel {
 
 .cancelText {
   cursor: pointer;
+  color: red;
+}
+
+.cancelText:hover {
+  color: black;
 }
 
 .noResults {
@@ -493,6 +501,11 @@ label.reviewLabel {
   background: #a7bee7;
   line-height: 2.7rem;
   font-size: 2rem;
+  cursor: pointer;
+}
+
+#submitConcernButton:hover {
+  background: #778eb5
 }
 
 #searchZipInput::placeholder {

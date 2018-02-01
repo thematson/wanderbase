@@ -23,7 +23,9 @@ const ConcernFormReview = ({
 
   return (
     <div className="top" id="concernreview">
-      <h5>Please confirm your entries</h5>
+      <div id="reviewHeader">
+        <span>Please confirm your entries</span>
+      </div>
       {reviewFields}
       <br />
       <div id="submitConcernButton">
@@ -34,7 +36,7 @@ const ConcernFormReview = ({
       <br />
 
       <span className="cancelText" onClick={onCancel}>
-        <i class="material-icons">backspace</i>&nbsp; <h6></h6>
+        &#8647;Back
       </span>
       {/* <button
         onClick={() => submitConcern(formValues, history)}
