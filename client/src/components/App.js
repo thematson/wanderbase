@@ -31,14 +31,6 @@ class App extends Component {
             <div className="container">
               <br />
 
-              {/* <ReactFileReader
-                fileTypes={[".csv", ".zip"]}
-                base64={true}
-                multipleFiles={true}
-                handleFiles={this.handleFiles}
-              >
-                <button className="btn">Upload</button>
-              </ReactFileReader> */}
 
               <Route exact path="/concerns" component={Dashboard} />
               <Route path="/concerns/new" component={ConcernNew} />

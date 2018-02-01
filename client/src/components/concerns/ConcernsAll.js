@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { fetchConcerns } from "../../actions";
 import { Button, Card, Row, Col } from "react-materialize";
 import DeleteBtn from "./DeleteBtn";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 import Modal from "react-modal";
 
@@ -90,76 +92,78 @@ class ConcernsAll extends Component {
     if (this.props.concerns.length === 0) {
       return (
         <div>
-        <Card className="noResults">
-        There are no results.<br/>
-        Click to Return to Dashboard.
-        </Card>
-        </div>
-      )
-    } else {
-
-    return this.props.concerns.reverse().map(concern => {
-      return (
-        <div>
-          <Card
-            className="card"
-            textClassName="white-text"
-            id="matchCards"
-            key={concern._id}
-          >
-            <span className="card-title">
-              {concern.guestName} dated{" "}
-              {new Date(concern.dateRecorded).toLocaleDateString()}
-              {/* <DeleteBtn onClick={() => this.deleteConcern(concern._id)} /> */}
-              <DeleteBtn onClick={this.openModal} />
-              <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-              >
-                <h5 ref={subtitle => (this.subtitle = subtitle)}>
-                  Confirm Delete &nbsp;<i class="material-icons">
-                    delete_forever
-                  </i>
-                </h5>
-                <div>
-                  <p>Do you really want to delete {concern.guestName} ?</p>
-                </div>
-
-                <div
-                  className="confirmDelete"
-                  onClick={() => this.deleteConcern(concern._id)}
-                >
-                  <span>Yes, Delete</span>
-                </div>
-                <br />
-                <br />
-                <a
-                  style={{ color: "red" }}
-                  className="cancelText"
-                  onClick={this.closeModal}
-                >
-                  Cancel
-                </a>
-              </Modal>
-            </span>
-
-            <p>{concern.descOfConcern}</p>
-            <p>From: {concern.zipCode}</p>
-            <p>By: {concern.clerkId}</p>
-
-            <div className="card-action">
-              <a>Recovery: {concern.descOfRecovery}</a>
-              <a>Dated: {concern.recoveryCheck}</a>
-            </div>
-          </Card>
-          <br />
+          <Link to="/concerns">
+            <Card className="noResults" style={{ padding: 0, color: "black" }}>
+              <span className="card-title" style={{ background: "white", padding: 0 }}>There are no results.</span>
+              Click to Return to Dashboard.
+            </Card>
+          </Link>
         </div>
       );
-    });
-  }}
+    } else {
+      return this.props.concerns.reverse().map(concern => {
+        return (
+          <div>
+            <Card
+              className="card"
+              textClassName="white-text"
+              id="matchCards"
+              key={concern._id}
+            >
+              <span className="card-title">
+                {concern.guestName} dated{" "}
+                {new Date(concern.dateRecorded).toLocaleDateString()}
+                {/* <DeleteBtn onClick={() => this.deleteConcern(concern._id)} /> */}
+                <DeleteBtn onClick={this.openModal} />
+                <Modal
+                  isOpen={this.state.modalIsOpen}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <h5 ref={subtitle => (this.subtitle = subtitle)}>
+                    Confirm Delete &nbsp;<i class="material-icons">
+                      delete_forever
+                    </i>
+                  </h5>
+                  <div>
+                    <p>Do you really want to delete {concern.guestName} ?</p>
+                  </div>
+
+                  <div
+                    className="confirmDelete"
+                    onClick={() => this.deleteConcern(concern._id)}
+                  >
+                    <span>Yes, Delete</span>
+                  </div>
+                  <br />
+                  <br />
+                  <a
+                    style={{ color: "red" }}
+                    className="cancelText"
+                    onClick={this.closeModal}
+                  >
+                    Cancel
+                  </a>
+                </Modal>
+              </span>
+
+              <p>{concern.descOfConcern}</p>
+              <p>From: {concern.zipCode}</p>
+              <p>By: {concern.clerkId}</p>
+
+              <div className="card-action">
+                <a>Recovery: {concern.descOfRecovery}</a>
+                <a>Dated: {concern.recoveryCheck}</a>
+              </div>
+            </Card>
+            <br />
+          </div>
+        );
+      });
+    }
+  }
 
   render() {
     return <div className="top">{this.renderConcerns()}</div>;

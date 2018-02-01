@@ -12,9 +12,11 @@ import { log } from "util";
 class ConcernsMatch extends Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false,
-                    // searchComplete: false
-                  };
+    this.state = {
+      visible: false
+      // searchComplete: false
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   show() {
@@ -31,7 +33,11 @@ class ConcernsMatch extends Component {
     this.props.fetchConcerns();
     console.log(this.props.concerns);
     console.log(this.props);
+  }
 
+  handleClick() {
+    document.getElementById("theMatches").innerHTML = "";
+    this.forceUpdate();
   }
 
   renderMatches() {
@@ -68,87 +74,48 @@ class ConcernsMatch extends Component {
             <h5>There are no Arrivals with Concerns</h5>
           </Card>
         </div>
-      )
-
-    } else {
-
-    return matches.map(matches => {
-      var event = new Date();
-      var now = event.toLocaleDateString();
-      console.log(matches.guestName);
-
-      return (
-        <div>
-          <Card
-            key={matches._id}
-            className="card"
-            textClassName="white-text"
-            id="matchCards"
-            onClick={() => this.setState({ visible: true })}
-          >
-            <span className="card-title">
-              {matches.guestName} from {matches.zipCode}
-            </span>
-            <p>{matches.descOfConcern}</p>
-            <p>Dated: {new Date(matches.dateRecorded).toLocaleDateString()}</p>
-            <p>By: {matches.clerkId}</p>
-
-            {!visible ? (
-              <div className="card-action">
-                <a>Recovery: {matches.descOfRecovery}</a>
-                <a>Dated: {matches.recoveryCheck}</a>
-              </div>
-            ) : null}
-            <div>
-              {/* <button>show</button> */}
-              {visible ? (
-                <div>
-                  <br />
-                  <div
-                    visible={this.state.visible}
-                    onClose={this.hide.bind(this)}
-                  >
-                    <div>
-                      <label className="recoveryTag">RECOVERY</label>
-                      <input
-                        type="text"
-                        name="descOfRecovery"
-                        placeholder="Please provide a description of the recovery."
-                        className="recoveryInput"
-                      />
-                    </div>
-                    <div>
-                      <label className="recoveryTag">RECOVERY DATE</label>
-                      <input
-                        placeholder={now}
-                        readOnly
-                        className="recoveryInput"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="lighten-1 btn-flat white-text"
-                    id="addConcernButton"
-                  >
-                    <h5>
-                      NEXT<i className="material-icons">done</i>
-                    </h5>
-                  </button>
-                  <br />
-                  <br />
-                  <div className="centeringDiv">
-                    <Link to="/concerns" className=" btn btn-cancel red-text">
-                      CANCEL
-                    </Link>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </Card>
-        </div>
       );
-    })};
+    } else {
+      return matches.map(matches => {
+        var event = new Date();
+        var now = event.toLocaleDateString();
+        console.log(matches.guestName);
+
+        return (
+          <div id="theMatches">
+            <Card
+              key={matches._id}
+              className="card"
+              textClassName="white-text"
+              id="matchCardsAll"
+              onClick={() => this.setState({ visible: true })}
+            >
+              <span className="card-title">
+                {matches.guestName} from {matches.zipCode}
+              </span>
+              <p>{matches.descOfConcern}</p>
+              <p>
+                Dated: {new Date(matches.dateRecorded).toLocaleDateString()}
+              </p>
+              <p>By: {matches.clerkId}</p>
+              <div className="card-action">
+                  <a>Recovery: {matches.descOfRecovery}</a>
+                  <a>Dated: {matches.recoveryCheck}</a>
+                </div>
+                <div className="centeringDiv">
+                  <a
+                    to="/concerns"
+                    onClick={this.handleClick}
+                    className=" btn btn-cancel red-text"
+                  >
+                    clear
+                </a>
+                </div>
+            </Card>
+          </div>
+        );
+      });
+    }
   }
 
   render() {
@@ -163,3 +130,69 @@ function mapStateToProps({ concerns }) {
 }
 
 export default connect(mapStateToProps, { fetchConcerns })(ConcernsMatch);
+
+
+//  {!visible ? (
+//                 <div className="card-action">
+//                   <a>Recovery: {matches.descOfRecovery}</a>
+//                   <a>Dated: {matches.recoveryCheck}</a>
+//                 </div>
+//               ) : null}
+//               <div>
+//                 {visible ? (
+//                   <div>
+//                   <div className="card-action">
+//                     <a>Recovery: {matches.descOfRecovery}</a>
+//                     <a>Dated: {matches.recoveryCheck}</a>
+//                   </div>
+//                   <div className="centeringDiv">
+//                     <a
+//                       to="/concerns"
+//                       onClick={this.handleClick}
+//                       className=" btn btn-cancel red-text"
+//                     >
+//                       clear
+//                     </a>
+//                   </div>
+//                   </div>
+//                 ) : null}
+// /* AFTER VISIBLE ~~ LINE 109
+// <div>
+//   <br />
+//   <div visible={this.state.visible} onClose={this.hide.bind(this)}>
+//     <div>
+//       <label className="recoveryTag">RECOVERY</label>
+//       <input
+//         type="text"
+//         name="descOfRecovery"
+//         placeholder="Please provide a description of the recovery."
+//         className="recoveryInput"
+//         id="recoveryDescPlaceholder"
+//       />
+//     </div>
+//     <div>
+//       <label className="recoveryTag">RECOVERY DATE</label>
+//       <input placeholder={now} readOnly className="recoveryInput" />
+//     </div>
+//   </div>
+//   <button
+//     type="submit"
+//     className="lighten-1 btn-flat white-text"
+//     id="addConcernButton"
+//   >
+//     <h5>
+//       NEXT<i className="material-icons">done</i>
+//     </h5>
+//   </button>
+//   <br />
+//   <br />
+//   <div className="centeringDiv">
+//     <a
+//       to="/concerns"
+//       onClick={this.handleClick}
+//       className=" btn btn-cancel red-text"
+//     >
+//       CANCEL
+//     </a>
+//   </div>
+// </div>; */

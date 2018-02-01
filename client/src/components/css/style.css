@@ -197,9 +197,27 @@ form {
   background: whitesmoke;
   color: black;
   width: 60%;
+  margin: 0 auto !important;
+
   display: inherit;
-  margin: 0 auto;
   border: 0;
+}
+
+#matchCardsAll {
+  background: whitesmoke;
+  color: black;
+  width: 80%;
+  margin: 0 auto !important;
+  margin-left: 1.6rem !important;
+  margin-top: 1rem;
+  display: inherit;
+  border: 0;
+}
+
+#matchCardsAll p {
+  text-indent: 1rem;
+  color: black;
+  text-transform: uppercase;
 }
 
 #matchCards.card-title {
@@ -215,7 +233,11 @@ form {
 
 input.recoveryInput {
   margin: 0 !important;
-  color: antiquewhite !important;
+  color: black !important;
+}
+
+.recoveryInput::placeholder {
+  color: black;
 }
 
 .card-action a {
@@ -316,8 +338,9 @@ input {
 
 #searchUpdateForm {
   margin: 0 !important;
-
+  color: black;
 }
+
 
 #searchUpdateForm label {
   width: 100%;
@@ -330,7 +353,9 @@ input {
 #searchUpdateForm button {
   width: 100%;
   border: 0;
-  background: #778eb5;
+  background: #a7bee7;
+  height: 3rem;
+  font-size: 1.8rem;
 }
 
 #concernForm {
@@ -468,4 +493,16 @@ label.reviewLabel {
   background: #a7bee7;
   line-height: 2.7rem;
   font-size: 2rem;
+}
+
+#searchZipInput::placeholder {
+  color: black;
+}
+
+#recoveryDescPlaceholder::placeholder {
+  color: lightgray !important;
+}
+
+#textCrawlDiv {
+  min-height: 200px;
 }

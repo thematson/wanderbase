@@ -95,6 +95,7 @@ class Dashboard extends Component {
 
             <br />
             <br />
+            <div id="textCrawlDiv">
             <ReactRotatingText
               id="textCrawl"
               items={[
@@ -106,6 +107,7 @@ class Dashboard extends Component {
               deletingInterval="20"
               style={{ fontSize: "25px" }}
             />
+            </div>
           </div>
           <div className="col s3" id="secondColumn">
             <br />

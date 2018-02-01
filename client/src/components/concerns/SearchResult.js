@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Row, Col } from "react-materialize";
+import { Card } from "react-materialize";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import axios from "axios";
@@ -84,7 +84,7 @@ class SearchResult extends Component {
       });
     document.getElementById("searchDiv").innerHTML = "";
     document.getElementById("searchNameInput").value = "";
-    document.getElementById("searchZipInput").value = "";
+    document.getElementById("searchZipInput1").value = "";
   }
 
   render() {
@@ -158,7 +158,7 @@ class SearchResult extends Component {
                     </div>
                     <div>
                       <label>RECOVERY DATE</label>
-                      <input placeholder={now} readOnly />
+                      <input id="searchZipInput" placeholder={now} readOnly />
                     </div>
                     {/* <a class="btn-floating btn-large waves-effect waves-light">
                       <i class="material-icons">add</i>
