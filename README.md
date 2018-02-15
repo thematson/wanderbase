@@ -1,5 +1,13 @@
 # wanderbase
 
+Hosted at:
+
+https://pure-sea-27226.herokuapp.com/
+
+Walkthrough demo at:
+
+https://youtu.be/fpTL0JXA9Mc
+
 A web-app for the hospitality industry using React.
 
 Register / Login.
@@ -17,11 +25,5 @@ You are now able to proactively recover from past incident (or proactively arran
 
 Update what the recovery was in the database for future use, or simply delete if not needed.
 
-hosted at:
 
-https://pure-sea-27226.herokuapp.com/
-
-walkthrough demo at:
-
-https://youtu.be/fpTL0JXA9Mc
 
