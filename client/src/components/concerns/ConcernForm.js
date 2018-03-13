@@ -35,20 +35,6 @@ class ConcernForm extends Component {
           onSubmit={this.props.handleSubmit(this.props.onConcernSubmit)}
         >
           {this.renderFields()}
-          {/* <div>
-            <label htmlFor="filled-in-box">
-              Recovery Completed? &nbsp; &nbsp;
-            </label>{" "}
-            <Field
-              name="recoveryCheck"
-              className="filled-in"
-              id="filled-in-box"
-              component="input"
-              type="checkbox"
-            />
-            <div />
-            <br />
-          </div> */}
 
           <button
             type="submit"

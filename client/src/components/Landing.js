@@ -3,8 +3,7 @@ import Background from "./parallax-template/background3.jpg";
 
 const Landing = () => {
   return (
-    // <div>
-    // Hi Landing</div>
+
   <div id="splashPage">
 
     <header className="masthead text-center text-white">
@@ -12,7 +11,6 @@ const Landing = () => {
         <div className="container">
           <h1 className="masthead-heading mb-0">wanderBase</h1>
           <h2 className="masthead-subheading mb-0">The Guest Experience - Personalized</h2>
-          {/* <!-- <a href="#" className="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a> --> */}
         </div>
       </div>
       <div className="bg-circle-1 bg-circle"></div>

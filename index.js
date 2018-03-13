@@ -20,11 +20,10 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.json());
 
 app.use(
   cookieSession({
-    //below translates = 30 days * hours * min * sec * millisec
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
@@ -33,21 +32,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// routes ======================================================================
-// require("./app/routes.js")(app, passport); // load our routes and pass in our app and fully configured passport
-
 require("./routes/authRoutes")(app);
 require("./routes/concernRoutes")(app);
-// require("./routes/fileuploadRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
-  //express will serve up prodeuction assets
-  //like main.js or main.css
+
   app.use(express.static("client/build"));
 
-  //or express will serve up index.html file
-  //if it doesn't recognize the route
   const path = require("path");
   app.get("*", (req, res) => {
     res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));

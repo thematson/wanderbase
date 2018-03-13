@@ -41,29 +41,21 @@ class Dashboard extends Component {
         }
         result.push(obj);
       }
-      //return result; //JavaScript object
-      // result= JSON.stringify(result); //JSON
+
       for (var k = 0; k < result.length; k++) {
         console.log(result[k].NAME);
         matchedNames.push(result[k].NAME);
       }
-      // this.setState(
-      //   update(this.state, {matchedNames: {$push: matchedNames}})
-      // )
+
       console.log(matchedNames);
       self.setState({
         matchedNames: matchedNames,
         searchComplete: true
       });
 
-      // console.log(result);
     };
     console.log(this);
-    // setTimeout(() => {
-    //   this.setState({
-    //     matchedNames: matchedNames
-    //   });
-    // }, 1500);
+
     reader.readAsText(files[0]);
     console.log(matchedNames);
   };

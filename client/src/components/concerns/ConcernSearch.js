@@ -31,12 +31,6 @@ class ConcernSearch extends Component {
     this.setState({ zipCode: event.target.value });
   }
 
-  // componentDidMount() {
-
-  //   console.log(this.props);
-
-  // }
-
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.submission);

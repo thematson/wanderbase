@@ -113,7 +113,6 @@ class ConcernsAll extends Component {
               <span className="card-title">
                 {concern.guestName} dated{" "}
                 {new Date(concern.dateRecorded).toLocaleDateString()}
-                {/* <DeleteBtn onClick={() => this.deleteConcern(concern._id)} /> */}
                 <DeleteBtn onClick={this.openModal} />
                 <Modal
                   isOpen={this.state.modalIsOpen}

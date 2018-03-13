@@ -14,7 +14,6 @@ class ConcernsMatch extends Component {
     super(props);
     this.state = {
       visible: false
-      // searchComplete: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -26,9 +25,6 @@ class ConcernsMatch extends Component {
     this.setState = { visible: false };
   }
 
-  // searchComplete() {
-  //   this.setState = { searchComplete : true };
-  // }
   componentDidMount() {
     this.props.fetchConcerns();
     console.log(this.props.concerns);

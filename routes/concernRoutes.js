@@ -1,15 +1,8 @@
-// import { read } from "fs";
-
-// import { read } from "fs";
-
 const _ = require("lodash");
 const Path = require("path-parser");
 const { URL } = require("url");
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
-// const Mailer = require("../services/Mailer");
-// const emailResponse = require("../services/emailResponse");
-
 const nodemailer = require("nodemailer");
 
 const Concern = mongoose.model("concerns");

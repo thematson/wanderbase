@@ -38,13 +38,7 @@ const ConcernFormReview = ({
       <span className="cancelText" onClick={onCancel}>
         &#8647;Back
       </span>
-      {/* <button
-        onClick={() => submitConcern(formValues, history)}
-        className="green btn-flat right white-text"
-      >
-        Submit Concern
-        <i className="material-icons right">email</i>
-      </button> */}
+
     </div>
   );
 };

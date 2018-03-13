@@ -107,13 +107,7 @@ class SearchResult extends Component {
         recoverycheck = "N/A";
       }
 
-      //   if (!match._id) {
-      //   return (
-      //     <div className="noMatches">
-      //     <h1 style={{ color: 'black' }}>There are no matches</h1>
-      //     </div>
-      //   )
-      // } else {
+
       return (
         <div id="searchDiv">
           <Card
@@ -137,7 +131,6 @@ class SearchResult extends Component {
               </div>
             ) : null}
             <div>
-              {/* <button>show</button> */}
               {visible ? (
                 <div>
                   <br />
@@ -160,9 +153,6 @@ class SearchResult extends Component {
                       <label>RECOVERY DATE</label>
                       <input id="searchZipInput" placeholder={now} readOnly />
                     </div>
-                    {/* <a class="btn-floating btn-large waves-effect waves-light">
-                      <i class="material-icons">add</i>
-                    </a> */}
 
                     <button type="submit" onClick={this.openModal}>
                       SUBMIT
@@ -187,7 +177,6 @@ class SearchResult extends Component {
         </div>
       );
 
-      // });
     });
   }
 }

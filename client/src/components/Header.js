@@ -11,7 +11,6 @@ class Header extends Component {
         return <span>wanderBase</span>;
       default:
         return <span>wanderBase</span>;
-      // return <span>Welcome, {this.props.auth.userName} </span>;
     }
   }
   renderContent() {
@@ -41,7 +40,6 @@ class Header extends Component {
           <Link
             to={this.props.auth ? "/concerns" : "/"}
             className="left brand-logo"
-            // style={{ padding: "0 0 0 30px" }}
           >
             {this.renderTitle()}
           </Link>

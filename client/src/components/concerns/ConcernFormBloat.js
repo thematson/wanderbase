@@ -111,24 +111,6 @@ let ConcernForm = props => {
   );
 };
 
-// function validate(values) {
-//   const errors = {};
-
-//   errors.recipients = validateEmails(values.recipients || "");
-
-//   _.each(formFields, ({ name }) => {
-//     if (!values[name]) {
-//       errors[name] = "You must provide a value";
-//     }
-//   });
-
-//   return errors;
-// }
-
-// export default reduxForm({
-//   form: "concernForm",
-//   destroyOnUnmount: false
-// })(ConcernForm);
 
 ConcernForm = reduxForm({
   form: "concernForm" // a unique identifier for this form
@@ -144,19 +126,3 @@ ConcernForm = connect(state => {
 })(ConcernForm);
 
 export default ConcernForm;
-
-//   render() {
-//     return (
-//       <div>
-//         <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-//           {this.renderFields()}
-//           <button type="submit">Submit</button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
-
-// export default reduxForm({
-//   form: "concernForm"
-// })(ConcernForm);
